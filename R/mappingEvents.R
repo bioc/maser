@@ -312,7 +312,7 @@ mapProteinsToEvents <- function(events){
 #' @seealso \code{\link{plotTranscripts}}
 #' @export
 #' @import GenomicRanges
-#' @importFrom GenomeInfoDb seqlevels
+#' @importFrom Seqinfo seqlevels
 #' @importFrom parallel mclapply
 #' @importFrom dplyr inner_join
 #' @import methods
@@ -334,9 +334,8 @@ mapTranscriptsToEvents <- function(events, gtf, ncores = 1){
   }
 
   #Add chr to seqnames - necessary for Gviz plots and compatible with maser()
-  if(any(!grepl("chr", GenomeInfoDb::seqlevels(gtf)))){
-    GenomeInfoDb::seqlevels(gtf) <- paste0("chr", 
-                                           GenomeInfoDb::seqlevels(gtf)) 
+  if(any(!grepl("chr", Seqinfo::seqlevels(gtf)))){
+    Seqinfo::seqlevels(gtf) <- paste0("chr", Seqinfo::seqlevels(gtf)) 
   }
   
   gtf_exons <- gtf[gtf$type=="exon",]

@@ -167,7 +167,7 @@ plotGenePSI <- function(events, type = c("A3SS", "A5SS", "SE", "RI", "MXE"),
 #' @seealso \code{\link{mapTranscriptsToEvents}}
 #' @export
 #' @import GenomicRanges
-#' @import GenomeInfoDb
+#' @import Seqinfo
 #' @import ggplot2
 #' @import Gviz
 #' @import rtracklayer
@@ -188,14 +188,14 @@ plotTranscripts <- function(events, type = c("A3SS", "A5SS", "SE", "RI", "MXE"),
   }
   
   #Add chr to seqnames - necessary for Gviz plots
-  if(any(!grepl("chr", GenomeInfoDb::seqlevels(gtf)))){
-    GenomeInfoDb::seqlevels(gtf) <- paste0("chr", GenomeInfoDb::seqlevels(gtf)) 
+  if(any(!grepl("chr", Seqinfo::seqlevels(gtf)))){
+    Seqinfo::seqlevels(gtf) <- paste0("chr", Seqinfo::seqlevels(gtf)) 
   }
   
   #Check and remove non-standard chr
   std_chr <- c(paste0("chr", seq(1:22)), "chrX", "chrY")
   if (any(!seqlevels(gtf) %in% std_chr)){
-    GenomeInfoDb::seqlevels(gtf, pruning.mode = "coarse" ) <- std_chr
+    Seqinfo::seqlevels(gtf, pruning.mode = "coarse" ) <- std_chr
   }
   
   type <- match.arg(type)
@@ -311,7 +311,7 @@ plotTranscripts <- function(events, type = c("A3SS", "A5SS", "SE", "RI", "MXE"),
 #' @seealso \code{\link{mapProteinFeaturesToEvents}}
 #' @export
 #' @import GenomicRanges
-#' @import GenomeInfoDb
+#' @import Seqinfo
 #' @import ggplot2
 #' @import Gviz
 #' @import methods
@@ -338,14 +338,14 @@ plotUniprotKBFeatures <- function(events,
   }
   
   #Check chr to seqnames - necessary for Gviz plots
-  if(any(!grepl("chr", GenomeInfoDb::seqlevels(gtf)))){
-    GenomeInfoDb::seqlevels(gtf) <- paste0("chr", GenomeInfoDb::seqlevels(gtf)) 
+  if(any(!grepl("chr", Seqinfo::seqlevels(gtf)))){
+    Seqinfo::seqlevels(gtf) <- paste0("chr", Seqinfo::seqlevels(gtf)) 
   }
   
   #Check and remove non-standard chr
   std_chr <- c(paste0("chr", seq(1:22)), "chrX", "chrY")
   if (any(!seqlevels(gtf) %in% std_chr)){
-    GenomeInfoDb::seqlevels(gtf, pruning.mode = "coarse" ) <- std_chr
+    Seqinfo::seqlevels(gtf, pruning.mode = "coarse" ) <- std_chr
   }
   
   type <- match.arg(type)

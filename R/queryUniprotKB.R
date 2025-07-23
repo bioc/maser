@@ -38,7 +38,7 @@ createGRangesUniprotKBtrack <- function(track_name){
   bed <- cbind(bed, Name = name)
   bed.gr <- methods::as(bed, "GRanges")
   
-  GenomeInfoDb::genome(bed.gr) <- "hg38"
+  Seqinfo::genome(bed.gr) <- "hg38"
 
   return(bed.gr)
   
@@ -72,14 +72,14 @@ urlTracksUniprotKB <- function(){
 }
 
 #' @import GenomicRanges
-#' @import GenomeInfoDb
+#' @import Seqinfo
 overlappingFeatures <- function(feature_gr, eventGr){
   
   #Define region around splicing event
   region <- range(unlist(eventGr))
   start(region) <- start(region) - 10
   end(region) <- end(region) + 10
-  GenomeInfoDb::genome(region) <- "hg38"
+  Seqinfo::genome(region) <- "hg38"
   
   ov <- findOverlaps(eventGr, feature_gr)
   ov_features <- feature_gr[subjectHits(ov)]

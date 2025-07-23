@@ -1,7 +1,7 @@
 Package: maser
 Type: Package
 Title: Mapping Alternative Splicing Events to pRoteins
-Version: 1.27.0
+Version: 1.27.1
 Authors@R: person("Diogo", "F.T. Veiga", email = "diogof.veiga@gmail.com",
                   role = c("aut", "cre"))
 Description: This package provides functionalities for downstream analysis, 
@@ -19,7 +19,7 @@ Imports:
     reshape2,
     Gviz,
     DT,
-    GenomeInfoDb,
+    Seqinfo,
     stats,
     utils,
     IRanges,
